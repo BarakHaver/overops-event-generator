@@ -17,73 +17,69 @@ import org.springframework.util.StopWatch;
 
 @Aspect
 @Configuration
-public class TakipiAspect {
-
+public class TakipiAspect
+{
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
-
 	private final Takipi takipi;
-
+	
 	@Autowired
-	public TakipiAspect(Takipi takipi) {
+	public TakipiAspect(Takipi takipi)
+	{
 		this.takipi = takipi;
 	}
-
+	
 	@Before("@annotation(com.overops.examples.utils.TakipiInvocationCounter)")
-	public void count(JoinPoint joinPoint) throws Throwable {
-
+	public void count(JoinPoint joinPoint) throws Throwable
+	{
 		Class declaringType = joinPoint.getSignature().getDeclaringType();
-
-		try {
+		
+		try
+		{
 			log.info("creating 'count' context for class : {}", declaringType);
-
+			
 			TakipiContext context = takipi.contexts().createContext(declaringType);
-
 			TakipiCountMetric countMetric = takipi.metrics().createCountMetric("COUNT_" + joinPoint.getSignature().getName());
-
+			
 			countMetric.increment(context);
-
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			log.error("an exception occurred while trying to capture custom metric: " + e.getMessage(), e);
 		}
-
 	}
-
+	
 	@Around("@annotation(com.overops.examples.utils.TakipiAverageExecutionTime)")
-	public Object average(ProceedingJoinPoint joinPoint) throws Throwable {
-
+	public Object average(ProceedingJoinPoint joinPoint) throws Throwable
+	{
 		Class declaringType = joinPoint.getSignature().getDeclaringType();
-
 		String metricName = "AVERAGE_" + joinPoint.getSignature().getName();
-
 		StopWatch sw = new StopWatch(metricName);
-
-		try {
-
+		
+		try
+		{
 			log.info("creating 'average' context for class : {}", declaringType);
-
+			
 			TakipiContext context = takipi.contexts().createContext(declaringType);
-
 			TakipiAverageMetric averageMetric = takipi.metrics().createAverageMetric(metricName);
-
+			
 			sw.start();
-
-			try {
-
+			
+			try
+			{
 				return joinPoint.proceed();
-
-			} finally {
-
+			}
+			finally
+			{
 				sw.stop();
-
+				
 				averageMetric.update(context, sw.getTotalTimeMillis());
 			}
-
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			log.error("an exception occurred while trying to capture custom metric: " + e.getMessage(), e);
 		}
-
+		
 		return joinPoint.proceed();
-
 	}
 }

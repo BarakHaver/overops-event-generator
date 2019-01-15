@@ -12,33 +12,33 @@ import java.io.IOException;
 
 
 @Service
-public class HttpService extends AbstractEventService {
-
+public class HttpService extends AbstractEventService
+{
+	
 	@Override
-	void fireEvent(boolean generateEvent) {
-
+	void fireEvent(boolean generateEvent)
+	{
 		String url = "http://localhost:8080/throwError";
-
+		
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromUriString(url)
 				.queryParam(RestEndpoint.GENERATE_EVENT, generateEvent);
-
-		try {
+		
+		try
+		{
 			HttpClient client = HttpClientBuilder.create().build();
-
 			String uri = builder.toUriString();
-
+			
 			log.debug("calling uri = {}", uri);
-
+			
 			HttpResponse response = client.execute(new HttpGet(uri));
 			int statusCode = response.getStatusLine().getStatusCode();
-
+			
 			log.debug("status code = {}", statusCode);
-
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			log.debug(e.getMessage(), e);
 		}
-
-
 	}
 }
