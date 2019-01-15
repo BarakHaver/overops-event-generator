@@ -12,68 +12,68 @@ import javax.annotation.PreDestroy;
 @Service
 public class CustomEventService extends AbstractEventService {
 
-    private Takipi takipi;
+	private Takipi takipi;
 
-    private TakipiContext takipiContext = null;
+	private TakipiContext takipiContext = null;
 
-    @Autowired
-    public CustomEventService(Takipi takipi) {
-        this.takipi = takipi;
+	@Autowired
+	public CustomEventService(Takipi takipi) {
+		this.takipi = takipi;
 
-        Class clazz = this.getClass();
+		Class clazz = this.getClass();
 
-        log.info("creating context for class : {}", clazz);
+		log.info("creating context for class : {}", clazz);
 
-        try {
+		try {
 
-            takipiContext = takipi.contexts().createContext(clazz);
+			takipiContext = takipi.contexts().createContext(clazz);
 
-        } catch (Exception e) {
+		} catch (Exception e) {
 
-            log.error("there was a problem creating context for class " + clazz + ": " + e.getMessage(), e);
+			log.error("there was a problem creating context for class " + clazz + ": " + e.getMessage(), e);
 
-        }
-    }
+		}
+	}
 
 
-    @PreDestroy
-    public void destroyTakipiContext() {
-        if (takipiContext != null) {
+	@PreDestroy
+	public void destroyTakipiContext() {
+		if (takipiContext != null) {
 
-            log.info("destroying TakipiContext: {}", takipiContext.toString());
+			log.info("destroying TakipiContext: {}", takipiContext.toString());
 
-            takipiContext.dispose();
-        }
-    }
+			takipiContext.dispose();
+		}
+	}
 
-    @Override
-    void fireEvent(boolean generateEvent) {
+	@Override
+	void fireEvent(boolean generateEvent) {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-        /*
+		/*
 
-            Custom Event Scenario:
+			Custom Event Scenario:
 
-            The OverOps SDK allows you to capture meaningful events in your code.
+			The OverOps SDK allows you to capture meaningful events in your code.
 
-         */
+		 */
 
-        TakipiEvent customEvent = takipi.events().createEvent("Custom OverOps Event");
+		TakipiEvent customEvent = takipi.events().createEvent("Custom OverOps Event");
 
-        customEvent.fire();
+		customEvent.fire();
 
-        if (takipiContext != null) {
+		if (takipiContext != null) {
 
-            TakipiCountMetric countMetric = takipi.metrics().createCountMetric("Invocation Count Metric");
+			TakipiCountMetric countMetric = takipi.metrics().createCountMetric("Invocation Count Metric");
 
-            countMetric.increment(takipiContext);
+			countMetric.increment(takipiContext);
 
-        } else {
-            log.warn("TakipiContext is null; this is an SDK bug");
-        }
+		} else {
+			log.warn("TakipiContext is null; this is an SDK bug");
+		}
 
-    }
+	}
 }

@@ -6,25 +6,25 @@ import org.springframework.stereotype.Service;
 public class SlowService extends AbstractEventService {
 
 
-    @Override
-    void fireEvent(boolean generateEvent) {
+	@Override
+	void fireEvent(boolean generateEvent) {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-        /*
+		/*
 
-            Timer Scenario:
+			Timer Scenario:
 
-            OverOps can be configured to capture events when method duration exceeds a user defined threshold
+			OverOps can be configured to capture events when method duration exceeds a user defined threshold
 
-        */
+		*/
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
-        }
-    }
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			log.error(e.getMessage(), e);
+		}
+	}
 }

@@ -7,18 +7,18 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractEventService implements EventService {
 
-    final Logger log = LoggerFactory.getLogger(this.getClass());
+	final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public void generateEvent(User user, boolean generateEvent, EventType eventType) {
+	@Override
+	public void generateEvent(User user, boolean generateEvent, EventType eventType) {
 
-        if (generateEvent) {
-            log.info("generating [{}] for user {}", eventType, user.toString());
-        }
+		if (generateEvent) {
+			log.info("generating [{}] for user {}", eventType, user.toString());
+		}
 
 
-        fireEvent(generateEvent);
-    }
+		fireEvent(generateEvent);
+	}
 
-    abstract void fireEvent(boolean generateEvent);
+	abstract void fireEvent(boolean generateEvent);
 }

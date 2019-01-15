@@ -37,11 +37,11 @@
 if [ -z "$MAVEN_SKIP_RC" ] ; then
 
   if [ -f /etc/mavenrc ] ; then
-    . /etc/mavenrc
+	. /etc/mavenrc
   fi
 
   if [ -f "$HOME/.mavenrc" ] ; then
-    . "$HOME/.mavenrc"
+	. "$HOME/.mavenrc"
   fi
 
 fi
@@ -54,21 +54,21 @@ case "`uname`" in
   CYGWIN*) cygwin=true ;;
   MINGW*) mingw=true;;
   Darwin*) darwin=true
-    # Use /usr/libexec/java_home if available, otherwise fall back to /Library/Java/Home
-    # See https://developer.apple.com/library/mac/qa/qa1170/_index.html
-    if [ -z "$JAVA_HOME" ]; then
-      if [ -x "/usr/libexec/java_home" ]; then
-        export JAVA_HOME="`/usr/libexec/java_home`"
-      else
-        export JAVA_HOME="/Library/Java/Home"
-      fi
-    fi
-    ;;
+	# Use /usr/libexec/java_home if available, otherwise fall back to /Library/Java/Home
+	# See https://developer.apple.com/library/mac/qa/qa1170/_index.html
+	if [ -z "$JAVA_HOME" ]; then
+	  if [ -x "/usr/libexec/java_home" ]; then
+		export JAVA_HOME="`/usr/libexec/java_home`"
+	  else
+		export JAVA_HOME="/Library/Java/Home"
+	  fi
+	fi
+	;;
 esac
 
 if [ -z "$JAVA_HOME" ] ; then
   if [ -r /etc/gentoo-release ] ; then
-    JAVA_HOME=`java-config --jre-home`
+	JAVA_HOME=`java-config --jre-home`
   fi
 fi
 
@@ -78,13 +78,13 @@ if [ -z "$M2_HOME" ] ; then
 
   # need this for relative symlinks
   while [ -h "$PRG" ] ; do
-    ls=`ls -ld "$PRG"`
-    link=`expr "$ls" : '.*-> \(.*\)$'`
-    if expr "$link" : '/.*' > /dev/null; then
-      PRG="$link"
-    else
-      PRG="`dirname "$PRG"`/$link"
-    fi
+	ls=`ls -ld "$PRG"`
+	link=`expr "$ls" : '.*-> \(.*\)$'`
+	if expr "$link" : '/.*' > /dev/null; then
+	  PRG="$link"
+	else
+	  PRG="`dirname "$PRG"`/$link"
+	fi
   done
 
   saveddir=`pwd`
@@ -101,52 +101,52 @@ fi
 # For Cygwin, ensure paths are in UNIX format before anything is touched
 if $cygwin ; then
   [ -n "$M2_HOME" ] &&
-    M2_HOME=`cygpath --unix "$M2_HOME"`
+	M2_HOME=`cygpath --unix "$M2_HOME"`
   [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+	JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
   [ -n "$CLASSPATH" ] &&
-    CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
+	CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
 fi
 
 # For Migwn, ensure paths are in UNIX format before anything is touched
 if $mingw ; then
   [ -n "$M2_HOME" ] &&
-    M2_HOME="`(cd "$M2_HOME"; pwd)`"
+	M2_HOME="`(cd "$M2_HOME"; pwd)`"
   [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
+	JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
   # TODO classpath?
 fi
 
 if [ -z "$JAVA_HOME" ]; then
   javaExecutable="`which javac`"
   if [ -n "$javaExecutable" ] && ! [ "`expr \"$javaExecutable\" : '\([^ ]*\)'`" = "no" ]; then
-    # readlink(1) is not available as standard on Solaris 10.
-    readLink=`which readlink`
-    if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
-      if $darwin ; then
-        javaHome="`dirname \"$javaExecutable\"`"
-        javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
-      else
-        javaExecutable="`readlink -f \"$javaExecutable\"`"
-      fi
-      javaHome="`dirname \"$javaExecutable\"`"
-      javaHome=`expr "$javaHome" : '\(.*\)/bin'`
-      JAVA_HOME="$javaHome"
-      export JAVA_HOME
-    fi
+	# readlink(1) is not available as standard on Solaris 10.
+	readLink=`which readlink`
+	if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
+	  if $darwin ; then
+		javaHome="`dirname \"$javaExecutable\"`"
+		javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
+	  else
+		javaExecutable="`readlink -f \"$javaExecutable\"`"
+	  fi
+	  javaHome="`dirname \"$javaExecutable\"`"
+	  javaHome=`expr "$javaHome" : '\(.*\)/bin'`
+	  JAVA_HOME="$javaHome"
+	  export JAVA_HOME
+	fi
   fi
 fi
 
 if [ -z "$JAVACMD" ] ; then
   if [ -n "$JAVA_HOME"  ] ; then
-    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
-      # IBM's JDK on AIX uses strange locations for the executables
-      JAVACMD="$JAVA_HOME/jre/sh/java"
-    else
-      JAVACMD="$JAVA_HOME/bin/java"
-    fi
+	if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+	  # IBM's JDK on AIX uses strange locations for the executables
+	  JAVACMD="$JAVA_HOME/jre/sh/java"
+	else
+	  JAVACMD="$JAVA_HOME/bin/java"
+	fi
   else
-    JAVACMD="`which java`"
+	JAVACMD="`which java`"
   fi
 fi
 
@@ -168,22 +168,22 @@ find_maven_basedir() {
 
   if [ -z "$1" ]
   then
-    echo "Path not specified to find_maven_basedir"
-    return 1
+	echo "Path not specified to find_maven_basedir"
+	return 1
   fi
 
   basedir="$1"
   wdir="$1"
   while [ "$wdir" != '/' ] ; do
-    if [ -d "$wdir"/.mvn ] ; then
-      basedir=$wdir
-      break
-    fi
-    # workaround for JBEAP-8937 (on Solaris 10/Sparc)
-    if [ -d "${wdir}" ]; then
-      wdir=`cd "$wdir/.."; pwd`
-    fi
-    # end of workaround
+	if [ -d "$wdir"/.mvn ] ; then
+	  basedir=$wdir
+	  break
+	fi
+	# workaround for JBEAP-8937 (on Solaris 10/Sparc)
+	if [ -d "${wdir}" ]; then
+	  wdir=`cd "$wdir/.."; pwd`
+	fi
+	# end of workaround
   done
   echo "${basedir}"
 }
@@ -191,7 +191,7 @@ find_maven_basedir() {
 # concatenates all lines of a file
 concat_lines() {
   if [ -f "$1" ]; then
-    echo "$(tr -s '\n' ' ' < "$1")"
+	echo "$(tr -s '\n' ' ' < "$1")"
   fi
 }
 
@@ -207,13 +207,13 @@ MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 # For Cygwin, switch paths to Windows format before running java
 if $cygwin; then
   [ -n "$M2_HOME" ] &&
-    M2_HOME=`cygpath --path --windows "$M2_HOME"`
+	M2_HOME=`cygpath --path --windows "$M2_HOME"`
   [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+	JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
   [ -n "$CLASSPATH" ] &&
-    CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+	CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
   [ -n "$MAVEN_PROJECTBASEDIR" ] &&
-    MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
+	MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
 fi
 
 WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain

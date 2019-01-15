@@ -8,24 +8,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoggedWarnService extends AbstractEventService {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @TakipiAverageExecutionTime
-    @Override
-    void fireEvent(boolean generateEvent) {
+	@TakipiAverageExecutionTime
+	@Override
+	void fireEvent(boolean generateEvent) {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-         /*
+		 /*
 
-            Warn Scenario:
+			Warn Scenario:
 
-            OverOps captures detailed snapshots when calls to log.warn are made.
+			OverOps captures detailed snapshots when calls to log.warn are made.
 
-         */
+		 */
 
-        log.warn("log.warn() called!");
-    }
+		log.warn("log.warn() called!");
+	}
 }
