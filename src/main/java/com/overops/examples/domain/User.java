@@ -1,6 +1,5 @@
 package com.overops.examples.domain;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +7,8 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-public class User {
-
+public class User
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -22,11 +21,13 @@ public class User {
 	private String ssn;
 	private String password;
 	private String note;
-
-	public User() {
+	
+	public User()
+	{
 	}
-
-	public User(String firstName, String middleName, String lastName, String emailAddress, LocalDate birthDate, String placeOfBirth, String ssn, String password, String note) {
+	
+	public User(String firstName, String middleName, String lastName, String emailAddress, LocalDate birthDate, String placeOfBirth, String ssn, String password, String note)
+	{
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -37,49 +38,60 @@ public class User {
 		this.password = password;
 		this.note = note;
 	}
-
-	public long getId() {
+	
+	public long getId()
+	{
 		return id;
 	}
-
-	public String getFirstName() {
+	
+	public String getFirstName()
+	{
 		return firstName;
 	}
-
-	public String getMiddleName() {
+	
+	public String getMiddleName()
+	{
 		return middleName;
 	}
-
-	public String getLastName() {
+	
+	public String getLastName()
+	{
 		return lastName;
 	}
-
-	public String getEmailAddress() {
+	
+	public String getEmailAddress()
+	{
 		return emailAddress;
 	}
-
-	public LocalDate getBirthDate() {
+	
+	public LocalDate getBirthDate()
+	{
 		return birthDate;
 	}
-
-	public String getPlaceOfBirth() {
+	
+	public String getPlaceOfBirth()
+	{
 		return placeOfBirth;
 	}
-
-	public String getSsn() {
+	
+	public String getSsn()
+	{
 		return ssn;
 	}
-
-	public String getPassword() {
+	
+	public String getPassword()
+	{
 		return password;
 	}
-
-	public String getNote() {
+	
+	public String getNote()
+	{
 		return note;
 	}
-
+	
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "User{" +
 				"id=" + id +
 				", firstName='" + firstName + '\'' +

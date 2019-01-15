@@ -9,29 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Controller {
-
+public class Controller
+{
 	private static final Logger log = LoggerFactory.getLogger(Controller.class);
-
+	
 	private final CatchAndProcessService catchAndProcessService;
-
 	private final CatchAndIgnoreService catchAndIgnoreService;
-
 	private final LoggedErrorService loggedErrorService;
-
 	private final CustomEventService customEventService;
-
 	private final SlowService slowService;
-
 	private final LoggedWarnService loggedWarnService;
-
 	private final UncaughtExceptionService uncaughtExceptionService;
-
 	private final HttpService httpService;
-
-
+	
 	@Autowired
-	public Controller(CatchAndProcessService catchAndProcessService, CatchAndIgnoreService catchAndIgnoreService, LoggedErrorService loggedErrorService, CustomEventService customEventService, SlowService slowService, LoggedWarnService loggedWarnService, UncaughtExceptionService uncaughtExceptionService, HttpService httpService) {
+	public Controller(CatchAndProcessService catchAndProcessService, CatchAndIgnoreService catchAndIgnoreService, LoggedErrorService loggedErrorService, CustomEventService customEventService, SlowService slowService, LoggedWarnService loggedWarnService, UncaughtExceptionService uncaughtExceptionService, HttpService httpService)
+	{
 		this.catchAndProcessService = catchAndProcessService;
 		this.catchAndIgnoreService = catchAndIgnoreService;
 		this.loggedErrorService = loggedErrorService;
@@ -41,21 +34,22 @@ public class Controller {
 		this.uncaughtExceptionService = uncaughtExceptionService;
 		this.httpService = httpService;
 	}
-
-	public boolean route(long counter, User user) {
-
+	
+	public boolean route(long counter, User user)
+	{
 		boolean generateEvent = false;
-
-		if (counter != 0 && counter % 5 == 0) {
+		
+		if (counter != 0 && counter % 5 == 0)
+		{
 			generateEvent = true;
 		}
-
+		
 		EventType event = EventType.randomEvent();
-
+		
 		log.trace("for run {}, generate event for type [{}]? {}", counter, event, generateEvent);
-
-		switch (event) {
-
+		
+		switch (event)
+		{
 			case SWALLOWED_EXCEPTION:
 				catchAndIgnoreService.generateEvent(user, generateEvent, event);
 				break;
@@ -81,11 +75,7 @@ public class Controller {
 				httpService.generateEvent(user, generateEvent, event);
 				break;
 		}
-
-
+		
 		return generateEvent;
-
-
 	}
-
 }

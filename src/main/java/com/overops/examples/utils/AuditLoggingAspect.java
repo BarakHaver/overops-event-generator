@@ -13,43 +13,39 @@ import org.springframework.util.StopWatch;
 
 @Aspect
 @Component
-public class AuditLoggingAspect {
-
+public class AuditLoggingAspect
+{
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
+	
 	@Before("execution(* com.overops.examples.service.*.*(..))")
-	public void before(JoinPoint joinPoint) {
+	public void before(JoinPoint joinPoint)
+	{
 		log.debug("before {}", joinPoint);
 	}
-
-
+	
+	
 	@After("execution(* com.overops.examples.service.*.*(..))")
-	public void after(JoinPoint joinPoint) {
+	public void after(JoinPoint joinPoint)
+	{
 		log.debug("after {}", joinPoint);
 	}
-
+	
 	@Around("execution(* com.overops.examples.service.*.*(..))")
-	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-
+	public Object around(ProceedingJoinPoint joinPoint) throws Throwable
+	{
 		StopWatch sw = new StopWatch(joinPoint.toString());
-
+		
 		sw.start();
-
-		try {
-
+		
+		try
+		{
 			return joinPoint.proceed();
-
-		} finally {
-
+		}
+		finally
+		{
 			log.trace(sw.shortSummary());
-
+			
 			sw.stop();
 		}
-
-
 	}
-
 }
-
-
-

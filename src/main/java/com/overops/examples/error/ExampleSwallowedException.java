@@ -1,24 +1,29 @@
 package com.overops.examples.error;
 
-public class ExampleSwallowedException extends RuntimeException {
-
-	public ExampleSwallowedException() {
+public class ExampleSwallowedException extends RuntimeException
+{
+	public ExampleSwallowedException()
+	{
 		super();
 	}
-
-	public ExampleSwallowedException(String message) {
+	
+	public ExampleSwallowedException(String message)
+	{
 		super(message);
 	}
-
-	public ExampleSwallowedException(String message, Throwable cause) {
+	
+	public ExampleSwallowedException(String message, Throwable cause)
+	{
 		super(message, cause);
 	}
-
-	public ExampleSwallowedException(Throwable cause) {
+	
+	public ExampleSwallowedException(Throwable cause)
+	{
 		super(cause);
 	}
-
-	protected ExampleSwallowedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	
+	protected ExampleSwallowedException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }
