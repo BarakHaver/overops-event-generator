@@ -15,23 +15,23 @@ import java.io.IOException;
 @RestController
 public class RestEndpoint {
 
-    public static final String GENERATE_EVENT = "generateEvent";
+	public static final String GENERATE_EVENT = "generateEvent";
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(path = "/throwError", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void throwError(@RequestParam(value = GENERATE_EVENT, required = false, defaultValue = "false") boolean generateEvent, HttpServletResponse response) throws IOException {
+	@RequestMapping(path = "/throwError", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void throwError(@RequestParam(value = GENERATE_EVENT, required = false, defaultValue = "false") boolean generateEvent, HttpServletResponse response) throws IOException {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-        HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
+		HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        log.debug("setting HttpStatus = {}", internalServerError);
+		log.debug("setting HttpStatus = {}", internalServerError);
 
-        response.sendError(internalServerError.value());
+		response.sendError(internalServerError.value());
 
-    }
+	}
 
 }

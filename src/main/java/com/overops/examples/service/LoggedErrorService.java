@@ -6,22 +6,22 @@ import org.springframework.stereotype.Service;
 public class LoggedErrorService extends AbstractEventService {
 
 
-    @Override
-    void fireEvent(boolean generateEvent) {
+	@Override
+	void fireEvent(boolean generateEvent) {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-        /*
+		/*
 
-            Error Scenario:
+			Error Scenario:
 
-            OverOps captures detailed snapshots when calls to log.error are made.
+			OverOps captures detailed snapshots when calls to log.error are made.
 
-        */
+		*/
 
 
-        log.error("log.error() called!");
-    }
+		log.error("log.error() called!");
+	}
 }

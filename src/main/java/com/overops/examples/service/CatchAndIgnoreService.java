@@ -7,30 +7,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class CatchAndIgnoreService extends AbstractEventService {
 
-    @TakipiInvocationCounter
-    @Override
-    void fireEvent(boolean generateEvent) {
+	@TakipiInvocationCounter
+	@Override
+	void fireEvent(boolean generateEvent) {
 
-        if (!generateEvent) {
-            return;
-        }
+		if (!generateEvent) {
+			return;
+		}
 
-        try {
+		try {
 
-            /*
+			/*
 
-                Catch and Ignore Scenario:
+				Catch and Ignore Scenario:
 
-                An exception is thrown during the normal course of a method but instead of dealing with the exception,
-                the exception is buried or swallowed.  No logging occurs.  This would be invisible to logging aggregators
-                like Splunk or other monitoring tools.  Usually a sign of poor code.  Can lead to serious issues.
+				An exception is thrown during the normal course of a method but instead of dealing with the exception,
+				the exception is buried or swallowed.  No logging occurs.  This would be invisible to logging aggregators
+				like Splunk or other monitoring tools.  Usually a sign of poor code.  Can lead to serious issues.
 
-            */
+			*/
 
-            throw new ExampleSwallowedException("Exception occurred but it was never logged, eg. swallowed exception");
+			throw new ExampleSwallowedException("Exception occurred but it was never logged, eg. swallowed exception");
 
-        } catch (ExampleSwallowedException e) {
-            // i'll just bury this one
-        }
-    }
+		} catch (ExampleSwallowedException e) {
+			// i'll just bury this one
+		}
+	}
 }

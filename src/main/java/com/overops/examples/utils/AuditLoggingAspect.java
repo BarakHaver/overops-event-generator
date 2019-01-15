@@ -15,39 +15,39 @@ import org.springframework.util.StopWatch;
 @Component
 public class AuditLoggingAspect {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(* com.overops.examples.service.*.*(..))")
-    public void before(JoinPoint joinPoint) {
-        log.debug("before {}", joinPoint);
-    }
-
-
-    @After("execution(* com.overops.examples.service.*.*(..))")
-    public void after(JoinPoint joinPoint) {
-        log.debug("after {}", joinPoint);
-    }
-
-    @Around("execution(* com.overops.examples.service.*.*(..))")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-
-        StopWatch sw = new StopWatch(joinPoint.toString());
-
-        sw.start();
-
-        try {
-
-            return joinPoint.proceed();
-
-        } finally {
-
-            log.trace(sw.shortSummary());
-
-            sw.stop();
-        }
+	@Before("execution(* com.overops.examples.service.*.*(..))")
+	public void before(JoinPoint joinPoint) {
+		log.debug("before {}", joinPoint);
+	}
 
 
-    }
+	@After("execution(* com.overops.examples.service.*.*(..))")
+	public void after(JoinPoint joinPoint) {
+		log.debug("after {}", joinPoint);
+	}
+
+	@Around("execution(* com.overops.examples.service.*.*(..))")
+	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		StopWatch sw = new StopWatch(joinPoint.toString());
+
+		sw.start();
+
+		try {
+
+			return joinPoint.proceed();
+
+		} finally {
+
+			log.trace(sw.shortSummary());
+
+			sw.stop();
+		}
+
+
+	}
 
 }
 
